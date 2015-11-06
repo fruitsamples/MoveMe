@@ -28,12 +28,12 @@ Further details are given in comments in the code.
 ================================================================================
 BUILD REQUIREMENTS:
 
-Mac OS X 10.5.3, Xcode 3.1, iPhone OS 2.0
+Mac OS X 10.5.7, Xcode 3.1, iPhone OS 3.0
 
 ================================================================================
 RUNTIME REQUIREMENTS:
 
-Mac OS X 10.5.3, iPhone OS 2.0
+Mac OS X 10.5.7, iPhone OS 3.0
 
 ================================================================================
 PACKAGING LIST:
@@ -52,6 +52,9 @@ Displays a UIImage with text superimposed.
 
 ================================================================================
 CHANGES FROM PREVIOUS VERSIONS:
+
+Version 2.7
+- Corrected a memory leak where a CGPath was not released.
 
 Version 2.6
 - Updated for and tested with iPhone OS 2.0. First public release.
