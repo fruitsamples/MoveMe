@@ -28,12 +28,12 @@ Further details are given in comments in the code.
 ================================================================================
 BUILD REQUIREMENTS:
 
-Mac OS X 10.5.7, Xcode 3.1, iPhone OS 3.0
+iOS 4.0 SDK
 
 ================================================================================
 RUNTIME REQUIREMENTS:
 
-Mac OS X 10.5.7, iPhone OS 3.0
+iPhone OS 3.2 or later
 
 ================================================================================
 PACKAGING LIST:
@@ -52,6 +52,12 @@ Displays a UIImage with text superimposed.
 
 ================================================================================
 CHANGES FROM PREVIOUS VERSIONS:
+
+Version 2.9
+- Added CFBundleIconFiles in Info.plist.
+
+Version 2.8
+- Upgraded project to build with the iOS 4.0 SDK.
 
 Version 2.7
 - Corrected a memory leak where a CGPath was not released.
@@ -84,4 +90,4 @@ Version 2.1
 - Updated to use a nib file to create the application window and the instance of MoveMeView.
 
 ================================================================================
-Copyright (C) 2008 Apple Inc. All rights reserved.
+Copyright (C) 2008-2010 Apple Inc. All rights reserved.
