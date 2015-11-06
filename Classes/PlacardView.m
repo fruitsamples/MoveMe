@@ -1,9 +1,8 @@
-
 /*
      File: PlacardView.m
  Abstract: Displays a UIImage with text superimposed.
  
-  Version: 2.7
+  Version: 2.10
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -49,7 +48,6 @@
 
 #import "PlacardView.h"
 
-
 @implementation PlacardView
 
 @synthesize placardImage;
@@ -63,13 +61,14 @@
 	CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
 	
 	// Set self's frame to encompass the image
-	if (self = [self initWithFrame:frame]) {
+	self = [self initWithFrame:frame];
+	if (self) {
 
 		self.opaque = NO;
 		placardImage = image;
 		
 		// Load the display strings
-		NSString *path = [[NSBundle mainBundle] pathForResource:@"DisplayStrings" ofType:@"strings"];
+		NSString *path = [[NSBundle mainBundle] pathForResource:@"DisplayStrings" ofType:@"txt"];
 		NSString *string = [NSString stringWithContentsOfFile:path encoding:NSUTF16BigEndianStringEncoding error:NULL];
 		self.displayStrings = [string componentsSeparatedByString:@"\n"];
 		displayStringsIndex = 0;
@@ -92,7 +91,7 @@
 - (void)drawRect:(CGRect)rect {
 	
 	// Draw the placard at 0, 0
-	[placardImage drawAtPoint:(CGPointMake(0.0, 0.0))];
+	[placardImage drawAtPoint:(CGPointMake(0.0f, 0.0f))];
 	
 	/*
 	 Draw the current display string.
@@ -110,7 +109,7 @@
 	UIFont *font = [UIFont systemFontOfSize:fontSize];
 
 	[[UIColor blackColor] set];
-	point = CGPointMake(x, y + 0.5);
+	point = CGPointMake(x, y + 0.5f);
 	[currentDisplayString drawAtPoint:point forWidth:(self.bounds.size.width-STRING_INDENT) withFont:font fontSize:fontSize lineBreakMode:UILineBreakModeMiddleTruncation baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
 
 	[[UIColor whiteColor] set];
@@ -130,7 +129,7 @@
 	
 	UIFont *font = [UIFont systemFontOfSize:24];
 	// Precalculate size of text and size of font so that text fits inside placard
-	textSize = [currentDisplayString sizeWithFont:font minFontSize:9.0 actualFontSize:&fontSize forWidth:(self.bounds.size.width-STRING_INDENT) lineBreakMode:UILineBreakModeMiddleTruncation];
+	textSize = [currentDisplayString sizeWithFont:font minFontSize:9.0f actualFontSize:&fontSize forWidth:(self.bounds.size.width-STRING_INDENT) lineBreakMode:UILineBreakModeMiddleTruncation];
 
 	[self setNeedsDisplay];
 }

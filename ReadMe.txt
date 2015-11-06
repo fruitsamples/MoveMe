@@ -28,7 +28,7 @@ Further details are given in comments in the code.
 ================================================================================
 BUILD REQUIREMENTS:
 
-iOS 4.0 SDK
+iOS 4.2 SDK
 
 ================================================================================
 RUNTIME REQUIREMENTS:
@@ -52,6 +52,9 @@ Displays a UIImage with text superimposed.
 
 ================================================================================
 CHANGES FROM PREVIOUS VERSIONS:
+
+Version 2.10
+- Upgraded to iOS 4.2 SDK, DisplayStrings now included in project, now checking for more GCC warnings.
 
 Version 2.9
 - Added CFBundleIconFiles in Info.plist.

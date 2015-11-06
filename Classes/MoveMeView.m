@@ -1,10 +1,9 @@
-
 /*
      File: MoveMeView.m
  Abstract: Contains a (placard) view that can be moved by touch. Illustrates
  handling touch events and two styles of animation.
  
-  Version: 2.7
+  Version: 2.10
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -50,6 +49,7 @@
 
 #import "MoveMeView.h"
 #import "PlacardView.h"
+
 // Import QuartzCore for animations
 #import <QuartzCore/QuartzCore.h>
 
@@ -65,7 +65,8 @@
 */
 - (id)initWithCoder:(NSCoder *)coder {
 	
-	if (self = [super initWithCoder:coder]) {
+	self = [super initWithCoder:coder];
+	if (self) {
 		[self setUpPlacardView];
 	}
 	return self;
@@ -77,7 +78,8 @@
  */
 - (id)initWithFrame:(CGRect)frame {
 	
-	if (self = [super initWithFrame:frame]) {
+	self = [super initWithFrame:frame];
+	if (self) {
 		[self setUpPlacardView];
 	}
 	return self;
@@ -158,6 +160,24 @@
 
 #if 1
 
+- (void)growAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+	
+#define MOVE_ANIMATION_DURATION_SECONDS 0.15
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:MOVE_ANIMATION_DURATION_SECONDS];
+	placardView.transform = CGAffineTransformMakeScale(1.1f, 1.1f);	
+	/*
+	 Move the placardView to under the touch.
+	 We passed the location wrapped in an NSValue as the context.
+	 Get the point from the value, then release the value because we retained it in touchesBegan:withEvent:.
+	 */
+	NSValue *touchPointValue = (NSValue *)context;
+	placardView.center = [touchPointValue CGPointValue];
+	[touchPointValue release];
+	[UIView commitAnimations];
+}
+
 - (void)animateFirstTouchAtPoint:(CGPoint)touchPoint {
 	/*
 	 "Pulse" the placard view by scaling up then down, then move the placard to under the finger.
@@ -173,30 +193,10 @@
 	[UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(growAnimationDidStop:finished:context:)];
-	CGAffineTransform transform = CGAffineTransformMakeScale(1.2, 1.2);
+	CGAffineTransform transform = CGAffineTransformMakeScale(1.2f, 1.2f);
 	placardView.transform = transform;
 	[UIView commitAnimations];
 }
-
-
-- (void)growAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-	
-#define MOVE_ANIMATION_DURATION_SECONDS 0.15
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:MOVE_ANIMATION_DURATION_SECONDS];
-	placardView.transform = CGAffineTransformMakeScale(1.1, 1.1);	
-	/*
-	 Move the placardView to under the touch.
-	 We passed the location wrapped in an NSValue as the context.
-	 Get the point from the value, then release the value because we retained it in touchesBegan:withEvent:.
-	 */
-	NSValue *touchPointValue = (NSValue *)context;
-	placardView.center = [touchPointValue CGPointValue];
-	[touchPointValue release];
-	[UIView commitAnimations];
-}
-
 
 #else
 
@@ -250,7 +250,7 @@
 	CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
 	bounceAnimation.removedOnCompletion = NO;
 	
-	CGFloat animationDuration = 1.5;
+	CGFloat animationDuration = 1.5f;
 
 	
 	// Create the path for the bounces
@@ -260,7 +260,7 @@
 	CGFloat midY = self.center.y;
 	CGFloat originalOffsetX = placardView.center.x - midX;
 	CGFloat originalOffsetY = placardView.center.y - midY;
-	CGFloat offsetDivider = 4.0;
+	CGFloat offsetDivider = 4.0f;
 	
 	BOOL stopBouncing = NO;
 	

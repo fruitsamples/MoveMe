@@ -1,10 +1,9 @@
- 
  /*
      File: MoveMeView.h
  Abstract: Contains a (placard) view that can be moved by touch. Illustrates
  handling touch events and two styles of animation.
  
-  Version: 2.7
+  Version: 2.10
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following

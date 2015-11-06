@@ -1,9 +1,8 @@
- 
  /*
      File: PlacardView.h
  Abstract: Displays a UIImage with text superimposed.
  
-  Version: 2.7
+  Version: 2.10
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
